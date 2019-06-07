@@ -1,0 +1,35 @@
+a
+{
+	text-decoration: none;	
+}
+#sidebar-container
+{
+	background-color: #013282;
+	width: 250px;
+	height: 100%;
+	position:absolute;
+	z-index: 2;
+	color:#ffffff;
+}
+
+#sidebar-profile-pic
+{
+	width:50px;
+	background-color: #ffffff;
+	border-radius: 20px;
+	position:relative;
+	margin:auto;
+
+}
+.sidebar-user-info
+{
+	margin:auto;
+	margin-top:50px;
+	
+	width: 120px;
+}
+
+.sidebar-menu
+{
+	list-style:none;
+}
