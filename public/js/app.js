@@ -1769,11 +1769,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['userid'],
   data: function data() {
     return {
-      expenses: []
+      expenses: [],
+      categories: []
     };
   },
   created: function created() {
@@ -1781,6 +1826,9 @@ __webpack_require__.r(__webpack_exports__);
 
     axios.get('./api/expenses/?id=' + this.userid).then(function (response) {
       return _this.expenses = response.data;
+    });
+    axios.get('./api/expensesCategory').then(function (response) {
+      return _this.categories = response.data;
     });
   }
 });
@@ -37254,6 +37302,8 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(expense.amount))]),
             _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(expense.date))]),
+            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(expense.created_at))])
           ])
         })
@@ -37261,7 +37311,73 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(1),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal fade", attrs: { id: "myModal", role: "dialog" } },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c(
+                "form",
+                { attrs: { method: "post", action: "api/saveExpenses" } },
+                [
+                  _c("label", { attrs: { for: "expensesCategory" } }, [
+                    _vm._v("Expenses Category")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "expensesCategory",
+                        name: "expensesCategory"
+                      }
+                    },
+                    _vm._l(_vm.categories, function(category) {
+                      return _c(
+                        "option",
+                        { domProps: { value: category.id } },
+                        [_vm._v(_vm._s(category.category_name))]
+                      )
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "amount" } }, [_vm._v("Amount")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", id: "amount", name: "amount" }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "date" } }, [_vm._v("Date")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "date", id: "date", name: "date" }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "userid" },
+                    domProps: { value: _vm.userid }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" })
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -37274,6 +37390,8 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("Amount")]),
       _vm._v(" "),
+      _c("th", [_vm._v("Entry Date")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Created_at")])
     ])
   },
@@ -37282,8 +37400,61 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "float-right" }, [
-      _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Add Expenses")])
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { "data-toggle": "modal", "data-target": "#myModal" }
+        },
+        [_vm._v("Add Expenses")]
+      )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title text-left" }, [
+        _vm._v("Add Expenses")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "form-group text-right",
+        staticStyle: { "margin-top": "5px" }
+      },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-danger",
+            attrs: { type: "button", "data-dismiss": "modal" }
+          },
+          [_vm._v("Cancel")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit", value: "save" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -49737,15 +49908,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/components/ExpensesComponent.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExpensesComponent_vue_vue_type_template_id_74df3447___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExpensesComponent.vue?vue&type=template&id=74df3447& */ "./resources/js/components/ExpensesComponent.vue?vue&type=template&id=74df3447&");
 /* harmony import */ var _ExpensesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExpensesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExpensesComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ExpensesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ExpensesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -49775,7 +49945,7 @@ component.options.__file = "resources/js/components/ExpensesComponent.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/components/ExpensesComponent.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

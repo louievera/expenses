@@ -4,8 +4,9 @@ namespace App\Http\Controllers\api;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use Session;
-use Session;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\support\facades\Input;
+
 class ExpenseController extends Controller
 {
 	
@@ -25,5 +26,18 @@ class ExpenseController extends Controller
     					->get();
 
     	return json_encode($result);
+    }
+
+    public function saveExpenses(Request $request)
+    {
+    	$expenseCat = $request->input('expensesCategory');
+    	$amount = $request->input('amount');
+    	$date = $request->input('date');
+    	$userid = $request->input('userid');
+    	
+
+    	DB::table('expenses')
+    		->insert(['user_id' => $userid, 'category_id' => $expenseCat, "amount" => $amount, 'date'=> $date]);
+    	return redirect::to('/expenses');
     }
 }

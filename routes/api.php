@@ -27,6 +27,8 @@ Route::get('/users','api\UserController@getUsers');
 Route::get('/expenses','api\ExpenseController@getExpenses');
 
 Route::get('/expensesCategory','api\ExpenseController@geExpensesCategory');
+Route::post('/saveExpenses','api\ExpenseController@saveExpenses');
+
 
 
 
