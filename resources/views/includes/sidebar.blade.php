@@ -18,7 +18,9 @@
 			@endif
 			<li><b>Expense Management</b></li>
 			<ul class="sidebar-menu">
-				<li><a href="{{url('expensesCategory')}}">Expenses Categories</a></li>
+				@if(Auth::user()->role_id == 1)
+					<li><a href="{{url('expensesCategory')}}">Expenses Categories</a></li>
+				@endif
 				<li><a href="{{url('/expenses')}}">Expenses</a></li>
 
 			</ul>

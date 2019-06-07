@@ -15,8 +15,9 @@
 	</table>
 		<div class="float-right">
 			<button class='btn btn-primary'>Add Expenses</button>
-			id goes here
 		</div>
+
+	
 
 </div>
 </template>
@@ -34,6 +35,7 @@
         	axios.get('./api/expenses/?id='+this.userid)
         	.then(response => this.expenses = response.data);
         }
+       
     }
 
 </script>

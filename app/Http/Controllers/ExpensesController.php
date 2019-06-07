@@ -11,4 +11,9 @@ class ExpensesController extends Controller
     {
     	return view('viewExpenses');
     }
+
+    public function viewExpensesCategory()
+    {
+    	return view('viewExpenseCategory');
+    }
 }

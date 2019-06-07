@@ -26,7 +26,8 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::get('/roles', 'UsersController@viewRoles');
 	Route::get('/users', 'UsersController@viewUsers');
 	Route::get('/expenses', 'ExpensesController@viewExpenses');
-	Route::get('/test', 'ExpensesController@test');
+	Route::get('/expensesCategory', 'ExpensesController@viewExpensesCategory');
+
 
 
 

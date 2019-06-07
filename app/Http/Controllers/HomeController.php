@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
-
+use Auth;
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -24,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $id = Auth::user()->id;
+        $expenses = DB::table('expenses as e')
+                        ->join('expenses_category as ec','e.category_id','=','ec.id')
+                        ->where('user_id',$id)
+                        ->get();
+        return view('home',compact('expenses'));
     }
 }

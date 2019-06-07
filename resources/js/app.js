@@ -25,6 +25,8 @@ window.Vue = require('vue');
 Vue.component('roles', require('./components/RolesComponent.vue').default);
 Vue.component('users', require('./components/UsersComponent.vue').default);
 Vue.component('expenses', require('./components/ExpensesComponent.vue').default);
+Vue.component('expenses-category', require('./components/ExpensesCategoryComponent.vue').default);
+
 
 
 /**
